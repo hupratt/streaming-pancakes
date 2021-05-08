@@ -1,17 +1,28 @@
-import React, { useRef, useEffect } from "react";
+import React from "react";
 import ReactHlsPlayer from "react-hls-player";
+import { connect } from "react-redux";
 
-const StreamShow = ({ stream }) => {
-  const videoRef = useRef();
-
+const StreamShow = ({ userInfo }) => {
+  console.log(userInfo.id);
+  const { id } = userInfo;
   return (
-    <div>
-      <ReactHlsPlayer
-        playerRef={videoRef}
-        src="https://live.craftstudios.eu:8443/stream/stream.m3u8"
-      />
-    </div>
+    <React.Fragment>
+      {id > 0 && <p>Logged in</p>}
+      <div>
+        <ReactHlsPlayer
+          src="https://live.craftstudios.eu:8443/stream/stream.m3u8"
+          autoPlay={true}
+          controls={true}
+          width="100%"
+          height="auto"
+        />
+      </div>
+    </React.Fragment>
   );
 };
 
-export default StreamShow;
+const mapStateToProps = (state, ownProps) => {
+  return { userInfo: state.auth.userInfo };
+};
+
+export default connect(mapStateToProps)(StreamShow);

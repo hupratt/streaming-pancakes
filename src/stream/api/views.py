@@ -48,7 +48,6 @@ class StreamList(generics.ListAPIView):
         category = self.request.query_params.get("category")
         url_user_id = self.request.query_params.get("userId")
         user = self.request.query_params.get("user")
-        print(self.request.query_params)
 
         if stream:
             queryset = self.queryset.filter(id=stream)

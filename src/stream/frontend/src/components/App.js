@@ -30,7 +30,7 @@ export default () => {
                 exact
                 render={(props) => <Auth {...props} />}
               />
-              <Route path="/signup" exact component={SignUp} />
+              {/* <Route path="/signup" exact component={SignUp} /> */}
               <Route path="/profile" exact component={Profile} />
               <Route path="/profile/edit" exact component={ProfileEdit} />
               <Route
