@@ -1,41 +1,55 @@
-import React, { useEffect} from 'react'
-import {connect} from 'react-redux'
-import { Redirect, Link } from 'react-router-dom'
+import React, { useEffect } from "react";
+import { connect } from "react-redux";
+import { Redirect, Link } from "react-router-dom";
 
-import {getStreams} from '../../actions/actions'
+import { getStreams } from "../../actions/actions";
 
-const StreamList = ({getStreams, streams, match}) => {
-    useEffect(() => {
-            getStreams(match.params.categoryName)
-    }, [match.params.categoryName, getStreams])
+const StreamList = ({ getStreams, streams, match }) => {
+  useEffect(() => {
+    getStreams(match.params.categoryName);
+  }, [match.params.categoryName, getStreams]);
 
-    const noStreams = () => {
-        if (match.params.categoryName) return <h2>No streams were found</h2>
+  const noStreams = () => {
+    if (match.params.categoryName) return <h2>No streams were found</h2>;
+  };
+
+  const renderStreams = () => {
+    if (!streams) {
+      return <Redirect to="/streams" />;
     }
-
-    return (
-        <div>
-            <h3>Live</h3>
-            <div className="ui celled list">
-                {streams[0] &&  streams.map(stream => {
-                
-                <Link className="item" key={stream.id} to={`/live/${stream.username}`}>
-                    <br/>
-                    <i className="big middle aligned icon camera" />
-                    <div className="content" >
-                        <strong style={{fontSize: '20px'}}>{stream.title}</strong>
-                    <div className="description"><strong style={{fontSize: '15px'}}>{stream.username} </strong>{stream.category_name ?  `is streaming ${stream.category_name}` : 'is Live'}</div>
-                    </div>
-                    <br/>
-                </Link>})}
+    return streams.map((stream) => {
+      if (!stream.title) return null;
+      return (
+        <Link className="item" key={stream.id} to={`/live/${stream.username}`}>
+          <br />
+          <i className="big middle aligned icon camera" />
+          <div className="content">
+            <strong style={{ fontSize: "20px" }}>{stream.title}</strong>
+            <div className="description">
+              <strong style={{ fontSize: "15px" }}>{stream.username} </strong>
+              {stream.category_name
+                ? `is streaming ${stream.category_name}`
+                : "is Live"}
             </div>
-            
-        </div>
-    )
-}
+          </div>
+          <br />
+        </Link>
+      );
+    });
+  };
+
+  return (
+    <div>
+      <h3>Live</h3>
+      <div className="ui celled list">
+        {streams && streams[0] ? renderStreams() : noStreams()}
+      </div>
+    </div>
+  );
+};
 
 const mapStateToProps = (state, ownProps) => {
-    return {streams: state.streams, cookies: ownProps.cookies}
-}
+  return { streams: state.streams.streams, cookies: ownProps.cookies };
+};
 
-export default connect(mapStateToProps, {getStreams})(StreamList)
+export default connect(mapStateToProps, { getStreams })(StreamList);

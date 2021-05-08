@@ -6,7 +6,12 @@ from django.contrib.auth.models import User
 from django.db.utils import IntegrityError
 from rest_framework.exceptions import ValidationError
 
-from .serializers import UserSerializer, AuthTokenSerializer, StreamSerializer, CategorySerializer
+from .serializers import (
+    UserSerializer,
+    AuthTokenSerializer,
+    StreamSerializer,
+    CategorySerializer,
+)
 from core.models import Stream, Category
 
 
@@ -16,12 +21,14 @@ class CreateUserView(generics.CreateAPIView):
 
 class CreateTokenView(ObtainAuthToken):
     """Create a new auth token for user"""
+
     serializer_class = AuthTokenSerializer
     renderer_classes = api_settings.DEFAULT_RENDERER_CLASSES
 
 
 class ManageUserView(generics.RetrieveUpdateDestroyAPIView):
     """Manage the authenticated user"""
+
     serializer_class = UserSerializer
     authentication_classes = (authentication.TokenAuthentication,)
     permission_classes = (permissions.IsAuthenticated,)
@@ -37,10 +44,11 @@ class StreamList(generics.ListAPIView):
     queryset = Stream.objects.all()
 
     def get_queryset(self):
-        stream = self.request.query_params.get('stream')
-        category = self.request.query_params.get('category')
-        url_user_id = self.request.query_params.get('userId')
-        user = self.request.query_params.get('user')
+        stream = self.request.query_params.get("stream")
+        category = self.request.query_params.get("category")
+        url_user_id = self.request.query_params.get("userId")
+        user = self.request.query_params.get("user")
+        print(self.request.query_params)
 
         if stream:
             queryset = self.queryset.filter(id=stream)
@@ -59,7 +67,6 @@ class StreamList(generics.ListAPIView):
         else:
             queryset = self.queryset.all()
 
-
         return queryset
 
 
@@ -72,7 +79,7 @@ class CreateStreamView(generics.CreateAPIView):
         try:
             serializer.save(user=self.request.user)
         except IntegrityError:
-            raise ValidationError('You already have a Stream')
+            raise ValidationError("You already have a Stream")
 
 
 class ManageStreamView(generics.RetrieveUpdateDestroyAPIView):
@@ -92,11 +99,11 @@ class ManageStreamView(generics.RetrieveUpdateDestroyAPIView):
 class CategoriesView(generics.ListAPIView):
     serializer_class = CategorySerializer
     queryset = Category.objects.all()
-    http_method_names = ('get',)
+    http_method_names = ("get",)
 
     def get_queryset(self):
-        name = self.request.query_params.get('name')
-        category_id = self.request.query_params.get('id')
+        name = self.request.query_params.get("name")
+        category_id = self.request.query_params.get("id")
         if name:
             queryset = self.queryset.filter(name=name)
         elif category_id:

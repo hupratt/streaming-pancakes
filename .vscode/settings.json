@@ -2,5 +2,6 @@
     "python.pythonPath": "/home/ubuntu/Dev/stream/env/bin/python3",
     "python.formatting.provider": "black",
     "editor.formatOnSave": true,
-
+    "[javascript]": {
+        "editor.defaultFormatter": "esbenp.prettier-vscode"}
 }
