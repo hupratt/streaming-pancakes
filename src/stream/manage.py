@@ -7,10 +7,24 @@ from django.conf import settings
 
 def main():
     if os.environ.get("DJANGO_DEVELOPMENT") == "True":
-        dotenv.read_dotenv(".env.development")
+        dotenv.read_dotenv(
+            os.path.join(
+                os.path.dirname(
+                    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                ),
+                ".env.development",
+            )
+        )
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "stream.settings")
     else:
-        dotenv.read_dotenv(".env")
+        dotenv.read_dotenv(
+            os.path.join(
+                os.path.dirname(
+                    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+                ),
+                ".env",
+            )
+        )
         os.environ.setdefault("DJANGO_SETTINGS_MODULE", "stream.settings")
 
     try:
