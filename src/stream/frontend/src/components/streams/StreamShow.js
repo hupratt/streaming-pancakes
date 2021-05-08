@@ -7,8 +7,7 @@ const StreamShow = ({ userInfo }) => {
   const { id } = userInfo;
   return (
     <React.Fragment>
-      {id > 0 && <p>Logged in</p>}
-      <div>
+      {id > 0 ? (
         <ReactHlsPlayer
           src="https://live.craftstudios.eu:8443/stream/stream.m3u8"
           autoPlay={true}
@@ -16,7 +15,9 @@ const StreamShow = ({ userInfo }) => {
           width="100%"
           height="auto"
         />
-      </div>
+      ) : (
+        <h1>Please log in to view the stream</h1>
+      )}
     </React.Fragment>
   );
 };
