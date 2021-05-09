@@ -102,7 +102,8 @@ export const getStream = (userName) => async (dispatch) => {
         payload: [{ error: "This channel does not exist" }],
       });
     } else {
-      if (response.status === 200 && !response.data[0]) {
+      if (response && response.status !== 200) {
+        console.log("This Channel is not streaming right now");
         dispatch({
           type: "GET_STREAM",
           payload: [
@@ -112,7 +113,9 @@ export const getStream = (userName) => async (dispatch) => {
             },
           ],
         });
-      } else {
+      }
+
+      if (response && response.status === 200) {
         dispatch({
           type: "GET_STREAM",
           payload: response.data,

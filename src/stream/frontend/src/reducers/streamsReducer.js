@@ -1,7 +1,7 @@
 import { updateObject } from "./utility";
 
 const initState = {
-  streams: [],
+  streams: [{ id: 0 }],
   error: null,
   loading: true,
 };

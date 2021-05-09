@@ -3,11 +3,9 @@ import ReactHlsPlayer from "react-hls-player";
 import { connect } from "react-redux";
 
 const StreamShow = ({ userInfo }) => {
-  console.log(userInfo.id);
-  const { id } = userInfo;
   return (
     <React.Fragment>
-      {id > 0 ? (
+      {userInfo && userInfo.id > 0 ? (
         <ReactHlsPlayer
           src="https://live.craftstudios.eu:8443/stream/stream.m3u8"
           autoPlay={true}

@@ -121,8 +121,13 @@ const WatchStream = ({
       if (!userInfo) {
         signInWithToken(cookies.token);
       } else {
+        console.log("render WatchStreams.js");
         if (stream && allStreams.length === 1) {
-          if (stream.errorName === userInfo.username) {
+          if (
+            userInfo.username === "undefined" ||
+            stream.errorName === userInfo.username
+          ) {
+            console.log("no streams attached");
             return noStream();
           } else if (stream.error) {
             return <div>{stream.error}</div>;
