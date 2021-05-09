@@ -6,6 +6,7 @@ export const signInWithToken = (token) => async (dispatch) => {
       Authorization: `Token ${token}`,
     },
   });
+  console.log("dispatch log in");
   dispatch({
     type: "SIGN_IN",
     payload: {

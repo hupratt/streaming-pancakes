@@ -62,6 +62,9 @@ const WatchStream = ({
     if (streamWasDeleted) {
       return noStream();
     } else if (!cookies.token) {
+      if (allStreams.length === 0) {
+        return noStream();
+      }
       if (stream && allStreams.length === 1) {
         if (stream.error) {
           return <div>{stream.error}</div>;
@@ -123,15 +126,15 @@ const WatchStream = ({
       } else {
         console.log("render WatchStreams.js");
         if (stream && allStreams.length === 1) {
-          if (
-            userInfo.username === "undefined" ||
-            stream.errorName === userInfo.username
-          ) {
+          console.log(stream.errorName);
+          if (stream.errorName && stream.errorName === userInfo.username) {
             console.log("no streams attached");
             return noStream();
           } else if (stream.error) {
+            console.log("error: " + stream.error);
             return <div>{stream.error}</div>;
           } else if (userInfo.id === stream.user) {
+            console.log("render WatchStreams.js as owner");
             return (
               <div style={{ display: "flex" }}>
                 <div style={{ width: "70%" }}>
@@ -191,6 +194,7 @@ const WatchStream = ({
               </div>
             );
           } else {
+            console.log("render WatchStreams.js as guest");
             return (
               <div style={{ display: "flex" }}>
                 <div style={{ width: "70%" }}>
@@ -253,6 +257,8 @@ const WatchStream = ({
               </div>
             );
           }
+        } else {
+          return noStream();
         }
       }
     }
