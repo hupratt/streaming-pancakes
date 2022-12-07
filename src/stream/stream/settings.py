@@ -21,7 +21,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/3.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get("KEY", "")
+SECRET_KEY = os.environ.get("SECRET_KEY", "")
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = False
@@ -29,7 +29,7 @@ DEBUG = False
 if os.environ.get("DJANGO_DEVELOPMENT") == "True":
     DEBUG = True
 
-ALLOWED_HOSTS = ["*"]
+ALLOWED_HOSTS = ["localhost","127.0.0.1","live.craftstudios.shop"]
 
 
 # Application definition
@@ -94,7 +94,7 @@ WSGI_APPLICATION = "stream.wsgi.application"
 DATABASES = {
     "default": {
         "ENGINE": "django.db.backends.postgresql",
-        "NAME": "stream",
+        "NAME": os.environ.get("dbname"),
         "USER": os.environ.get("dbuser"),
         "PASSWORD": os.environ.get("dbpassword"),
         "HOST": os.environ.get("hostip"),

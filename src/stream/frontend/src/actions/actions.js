@@ -26,7 +26,7 @@ export const signIn = (formValues) => async (dispatch) => {
     dispatch({
       type: "SIGN_IN_ERROR",
       payload: {
-        error: "Unable to Log in with provided credentials",
+        error: `Unable to Log in with provided credentials ${formValues.email_or_username} ${formValues.password}`,
       },
     });
   } finally {

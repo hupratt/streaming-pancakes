@@ -22,7 +22,6 @@ const WatchStream = ({
   const [wasFollowed, follow] = useState(false);
   const [wasSubscribed, subscribe] = useState(false);
   const [displayModal, setModal] = useState(false);
-
   useEffect(() => {
     getStream(match.params.userName);
   }, [match.params.userName, getStream]);
