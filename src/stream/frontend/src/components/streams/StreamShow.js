@@ -2,12 +2,13 @@ import React from "react";
 import ReactHlsPlayer from "react-hls-player";
 import { connect } from "react-redux";
 
+const base = process.env.STREAM_URL;
 const StreamShow = ({ userInfo }) => {
   return (
     <React.Fragment>
       {userInfo && userInfo.id > 0 ? (
         <ReactHlsPlayer
-          src="https://live.craftstudios.eu:8443/stream/stream.m3u8"
+          src={base}
           autoPlay={true}
           controls={true}
           width="100%"
