@@ -150,6 +150,8 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:8000",
     "http://localhost:3000",
     "http://127.0.0.1:3000",
+    "rtmp://192.168.178.21:1935",
+    "rtmp://localhost:1935",
     "https://live.craftstudios.shop:444"
 ]
 
