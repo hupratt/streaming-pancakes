@@ -8,3 +8,8 @@ This django/react project is a basic wrapper around this basic HLS streaming fea
 <p align="center" width="100%">
     <img width="90%" src="https://github.com/hupratt/streaming-pancakes/blob/master/arch.drawio.png?raw=true">
 </p>
+
+## Database UML
+<p align="center" width="100%">
+    <img width="90%" src="https://github.com/hupratt/streaming-pancakes/blob/master/db.png?raw=true">
+</p>
