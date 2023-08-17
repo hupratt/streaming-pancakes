@@ -29,7 +29,12 @@ DEBUG = False
 if os.environ.get("DJANGO_DEVELOPMENT") == "True":
     DEBUG = True
 
-ALLOWED_HOSTS = ["localhost","127.0.0.1","live.craftstudios.shop"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "live.craftstudios.shop",
+    "live.bitwcmd.duckdns.org",
+]
 
 
 # Application definition
@@ -152,7 +157,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:3000",
     "rtmp://192.168.178.21:1935",
     "rtmp://localhost:1935",
-    "https://live.craftstudios.shop:444"
+    "https://live.craftstudios.shop:444",
 ]
 
 

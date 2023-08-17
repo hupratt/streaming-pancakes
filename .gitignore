@@ -107,3 +107,4 @@ GitHub.sublime-settings
 
 node_modules/
 main.js
+*.png
