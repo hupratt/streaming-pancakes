@@ -158,6 +158,7 @@ CORS_ORIGIN_WHITELIST = [
     "rtmp://192.168.178.21:1935",
     "rtmp://localhost:1935",
     "https://live.craftstudios.shop:444",
+    "https://live.bitwcmd.duckdns.org",
 ]
 
 
