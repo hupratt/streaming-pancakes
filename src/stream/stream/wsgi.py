@@ -12,27 +12,9 @@ import os, dotenv
 from django.core.wsgi import get_wsgi_application
 
 if os.environ.get("DJANGO_DEVELOPMENT") == "True":
-    dotenv.read_dotenv(
-        os.path.join(
-            os.path.dirname(
-                os.path.dirname(
-                    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-                )
-            ),
-            ".env.development",
-        )
-    )
+    dotenv.read_dotenv("/hdd/Dev/streaming-pancakes/.env.development")
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "stream.settings")
 else:
-    dotenv.read_dotenv(
-        os.path.join(
-            os.path.dirname(
-                os.path.dirname(
-                    os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-                )
-            ),
-            ".env",
-        )
-    )
+    dotenv.read_dotenv("/hdd/Dev/streaming-pancakes/.env")
     os.environ.setdefault("DJANGO_SETTINGS_MODULE", "stream.settings")
 application = get_wsgi_application()

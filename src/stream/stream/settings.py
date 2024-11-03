@@ -32,8 +32,7 @@ if os.environ.get("DJANGO_DEVELOPMENT") == "True":
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "live.craftstudios.shop",
-    "live.bitwcmd.duckdns.org",
+    "live.thekor.eu"
 ]
 
 

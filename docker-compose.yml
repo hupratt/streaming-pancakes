@@ -1,0 +1,35 @@
+networks:
+  live-network:
+    driver: bridge
+    ipam:
+     driver: default
+     config:
+       - subnet: 172.190.6.0/26
+    driver_opts:
+      com.docker.network.bridge.name: br_live
+
+services:
+  live-backend:
+    container_name: live
+    build: .
+    restart: always
+    ports:
+      - "8590:8590"
+    volumes:
+      - ./:/hdd/Dev/streaming-pancakes
+    networks:
+      - live-network
+    env_file:
+      - .env
+    command: sh -c "python src/stream/manage.py makemigrations &&
+                    python src/stream/manage.py migrate &&
+                    gunicorn src.stream.stream.wsgi:application -w 2 --bind 0.0.0.0:8590"
+                    # python src/stream/manage.py runserver 0.0.0.0:8590"
+  live-rtmp:
+     restart: always
+     build: ./nginx/
+     ports:
+       - "8049:8049"
+     volumes:
+       - /mnt/Stream:/mnt/Stream
+
