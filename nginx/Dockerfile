@@ -49,7 +49,10 @@ RUN ln -sf /dev/stdout /var/log/nginx/access.log && \
 
 # Set up config file
 COPY conf.d/ /etc/nginx/user.conf.d/
+COPY nginx.conf /etc/nginx/nginx.conf
 
 
 EXPOSE 1935
+EXPOSE 8049
+
 CMD ["nginx", "-g", "daemon off;"]

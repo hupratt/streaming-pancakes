@@ -61,6 +61,7 @@ REST_FRAMEWORK = {
 
 MIDDLEWARE = [
     "corsheaders.middleware.CorsMiddleware",
+    "whitenoise.middleware.WhiteNoiseMiddleware",
     "django.middleware.common.CommonMiddleware",
     "django.middleware.security.SecurityMiddleware",
     "django.contrib.sessions.middleware.SessionMiddleware",
@@ -145,6 +146,9 @@ USE_TZ = True
 STATIC_URL = "/static/"
 STATIC_ROOT = "/hdd/Dev/streaming-pancakes/static"
 MEDIA_ROOT = "/hdd/Dev/streaming-pancakes/media"
+
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedStaticFilesStorage'
+
 
 CORS_ORIGIN_ALLOW_ALL = DEBUG
 

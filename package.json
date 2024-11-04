@@ -39,6 +39,6 @@
   },
   "scripts": {
     "dev": "webpack --mode development --config webpack.config.js",
-    "build": "webpack --mode production --config webpack.config.production.js"
+    "build": "export SET NODE_OPTIONS=--openssl-legacy-provider && webpack --mode production --config webpack.config.production.js"
   }
 }
